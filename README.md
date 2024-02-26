@@ -1,5 +1,5 @@
 **Overview**
-This ETL process is a sleek demonstration of setting up an Extract, Transform, and Load (ETL) pipeline utilizing publicly available .csv data. The pipeline leverages Apache Airflow for workflow management to showcase how one might approach constructing a robust data pipeline with open-source tools and Python.
+This ETL process is a demonstration of setting up an Extract, Transform, and Load (ETL) pipeline utilizing publicly available .csv data. The pipeline leverages Apache Airflow for workflow management to showcase how one might approach constructing a robust data pipeline with open-source tools and Python.
 
 The project is designed to provide a template for integrating various data sources and performing data transformations in a scalable manner. It's an exemplary model, especially useful for those new to the concept of ETL processes, data orchestration with Airflow, or anyone interested in operationalizing data workflows with public datasets.
 
