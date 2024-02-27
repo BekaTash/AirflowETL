@@ -244,23 +244,6 @@ with DAG(
         python_callable=create_aggregated_covid_table,
         dag=dag,
     )
-    create_db_table_ve = PostgresOperator(
-        task_id ='create_db_table_ve',
-        postgres_conn_id='postgres_default',
-        sql="""
-    CREATE TABLE IF NOT EXISTS baur_covid_data (
-        Country_Region VARCHAR(255) PRIMARY KEY,
-        Last_Update TIMESTAMP,
-        Avg_Lat FLOAT,
-        Avg_Long FLOAT,
-        Total_Confirmed BIGINT,
-        Total_Deaths BIGINT,
-        Total_Recovered BIGINT,
-        Avg_Incident_Rate FLOAT,
-        Avg_Case_Fatality_Ratio FLOAT
-    );
-        """,
-    )
     check_if_data_available = HttpSensor(
         task_id='check_if_data_available',
         http_conn_id='http_default',
@@ -300,4 +283,4 @@ with DAG(
         op_kwargs={'table_name': 'aggregated_covid_data','execution_date': '{{ execution_date.strftime("%Y-%m-%d") }}'}, #adding execution date to fix error 
         dag=dag,
     )
-    create_db_table_ve >> create_aggregated_table_task >> check_if_data_available >> download_data >> aggregate_data >> clean_data >> validate_data >> insert_data_into_postgres
+    create_aggregated_table_task >> check_if_data_available >> download_data >> aggregate_data >> clean_data >> validate_data >> insert_data_into_postgres
